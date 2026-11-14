@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#f8f8f5">
+    <meta name="description" content="An interactive slang translator prototype.">
+    <title>Slang translator prototype</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='14' fill='%23f5df55'/%3E%3Cpath d='M12 14h24v16H23l-7 6v-6h-4z' fill='%231d2422'/%3E%3Cpath d='M19 21h3m5 0h3' stroke='%23f5df55' stroke-width='4'/%3E%3C/svg%3E">
+    <link rel="stylesheet" href="styles.css">
+    <script src="icons.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="app-toolbar">
+      <a class="brand" href="#twitter" aria-label="Return to thread" title="Return to thread"><span class="brand-mark" data-icon="pop"></span></a>
+      <div class="device-switch" role="group" aria-label="Preview device">
+        <button class="icon-button selected" id="desktop-button" aria-label="Desktop preview" aria-pressed="true" data-device="desktop"><span data-icon="monitor"></span></button>
+        <button class="icon-button" id="mobile-button" aria-label="Mobile preview" aria-pressed="false" data-device="mobile"><span data-icon="phone"></span></button>
+      </div>
+      <div class="toolbar-actions">
+        <div class="app-switch" role="group" aria-label="App">
+          <button id="twitter-button" class="icon-button selected" aria-label="Twitter" aria-pressed="true" data-view="twitter"><span data-icon="twitter"></span></button>
+          <button id="book-button" class="icon-button book-button" aria-label="Language book" aria-pressed="false" data-view="book"><span data-icon="book"></span><span class="book-dot" hidden></span></button>
+        </div>
+        <span class="toolbar-divider"></span>
+        <button class="power-button" id="power-button" aria-label="Pause automatic detection" aria-pressed="true"><span class="status-dot"></span><span data-icon="power"></span></button>
+      </div>
+    </header>
+    <main class="stage" id="stage">
+      <div class="device" id="device">
+        <div class="phone-status"><span>9:41</span><span class="phone-status-icons"><span data-icon="signal"></span><span data-icon="wifi"></span><span data-icon="battery"></span></span></div>
+        <div id="island" class="dynamic-island" aria-live="polite"></div>
+        <section class="twitter-layout" id="twitter-view" aria-label="Twitter prototype">
+          <aside class="twitter-sidebar">
+            <a href="#twitter" class="twitter-logo" aria-label="Twitter home"><span data-icon="twitter"></span></a>
+            <nav aria-label="Twitter navigation">
+              <button class="nav-item" data-twitter-nav="home" aria-label="Home"><span data-icon="home"></span><span class="nav-label">Home</span></button>
+              <button class="nav-item" data-twitter-nav="explore" aria-label="Explore"><span data-icon="search"></span><span class="nav-label">Explore</span></button>
+              <button class="nav-item" data-twitter-nav="notifications" aria-label="Notifications"><span data-icon="bell"></span><span class="nav-label">Notifications</span></button>
+              <button class="nav-item" data-twitter-nav="messages" aria-label="Messages"><span data-icon="mail"></span><span class="nav-label">Messages</span></button>
+              <button class="nav-item" data-twitter-nav="bookmarks" aria-label="Twitter bookmarks"><span data-icon="bookmark"></span><span class="nav-label">Bookmarks</span></button>
+              <button class="nav-item" data-twitter-nav="profile" aria-label="Profile"><span data-icon="user"></span><span class="nav-label">Profile</span></button>
+              <button class="nav-item" data-twitter-nav="more" aria-label="More"><span data-icon="moreCircle"></span><span class="nav-label">More</span></button>
+              <button class="tweet-button" id="compose-button" aria-label="Write a tweet"><span data-icon="feather"></span><span class="nav-label">Tweet</span></button>
+            </nav>
+            <button class="twitter-account" data-twitter-nav="profile" aria-label="Weston profile"><img class="avatar" src="assets/weston.jpg" alt=""><span class="account-text"><strong>Weston</strong><span>@weston</span></span><span data-icon="more"></span></button>
+          </aside>
+          <div class="thread-column" id="thread-scroller">
+            <header class="thread-heading"><button class="icon-button" id="thread-back" aria-label="Back to feed"><span data-icon="arrowLeft"></span></button><h1 id="thread-title">Thread</h1><button id="replay-button" class="icon-button replay-button" aria-label="Replay automatic detection"><span data-icon="rotate"></span></button></header>
+            <div id="timeline"></div>
+          </div>
+          <aside class="twitter-right">
+            <label class="twitter-search"><span data-icon="search"></span><input id="twitter-search" placeholder="Search Twitter" aria-label="Search Twitter"></label>
+            <div class="people-panel">
+              <h2>Relevant people</h2>
+              <div class="suggested-person"><img class="avatar" src="assets/maya.jpg" alt=""><div><strong>Maya Chen <span class="verified" data-icon="verified"></span></strong><span>@mayacreates</span></div><button class="follow-button" data-follow="maya">Follow</button></div>
+              <p>design student. probably making coffee.</p>
+            </div>
+            <div class="trends-panel"><h2>What’s happening</h2><button class="trend" data-search="finals"><span>Education · Trending</span><strong>#FinalsWeek</strong><span>12.4K Tweets</span><span class="trend-more" data-icon="more"></span></button><button class="trend" data-search="study"><span>Trending in United States</span><strong>Study Twitter</strong><span>8,642 Tweets</span><span class="trend-more" data-icon="more"></span></button><button class="trend" data-search="coffee"><span>Trending</span><strong>One more coffee</strong><span>3,821 Tweets</span><span class="trend-more" data-icon="more"></span></button></div>
+          </aside>
+          <nav class="mobile-twitter-nav" aria-label="Twitter mobile navigation"><button class="icon-button" data-twitter-nav="home" aria-label="Home"><span data-icon="home"></span></button><button class="icon-button" data-twitter-nav="explore" aria-label="Search"><span data-icon="search"></span></button><button class="icon-button" data-twitter-nav="notifications" aria-label="Notifications"><span data-icon="bell"></span></button><button class="icon-button" data-view="book" aria-label="Language book"><span data-icon="book"></span></button></nav>
+        </section>
+        <section class="book-view" id="book-view" aria-label="Language book" hidden></section>
+        <aside id="translator" class="translator" aria-label="Slang translation" aria-live="polite" hidden></aside>
+        <div class="home-indicator"></div>
+      </div>
+    </main>
+    <dialog id="modal" class="app-modal"><div id="modal-content"></div></dialog>
+    <div class="toast" id="toast" role="status" hidden></div>
+  </body>
+</html>
